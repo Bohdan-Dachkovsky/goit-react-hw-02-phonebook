@@ -1,27 +1,27 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styles from "./ContactForm.module.css";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styles from './ContactForm.module.css'
 
 export default class ContactForm extends Component {
   state = {
-    name: "",
-    number: "",
-  };
+    name: '',
+    number: '',
+  }
 
   handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     this.setState({
       [name]: value,
-    });
-  };
+    })
+  }
 
   handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    this.props.onAddContact({ ...this.state });
+    this.props.onAddContact({ ...this.state })
 
-    this.setState({ name: "", number: "" });
-  };
+    this.setState({ name: '', number: '' })
+  }
   render() {
     return (
       <form className={styles.TaskEditor} onSubmit={this.handleSubmit}>
@@ -49,12 +49,15 @@ export default class ContactForm extends Component {
           Add contact
         </button>
       </form>
-    );
+    )
   }
 }
-
+ContactForm.defaultProps = {
+  name: '',
+  number: '',
+}
 ContactForm.propTypes = {
   onAddContact: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
-};
+}
