@@ -36,11 +36,6 @@ export default class App extends Component {
     }
   }
 
-  changeFilter = () => {
-    const { filter } = this.state
-    this.setState(filter)
-  }
-
   getVisibleContacts = () => {
     const { contacts, filter } = this.state
 
@@ -56,10 +51,22 @@ export default class App extends Component {
       }
     })
   }
+  // handleChange = ({ target }) => {
+  //   const { name, value } = target
+  //   this.setState({ [name]: value })
+  // }
+  // changeFilter = ({ target }) => {
+  //   this.setState({
+  //     filter: target.value,
+  //   })
+  // }
+  filterUsers(e) {
+    this.setState({
+      filter: e.currentTarget.value,
+    })
+  }
 
   render() {
-    const { filter } = this.state
-
     const visibleContacts = this.getVisibleContacts()
 
     return (
@@ -69,7 +76,7 @@ export default class App extends Component {
         <ContactForm onAddContact={this.addContact} />
         <h2>Contacts</h2>
         {visibleContacts.length > 1 && (
-          <Filter value={filter} onChangeFilter={this.changeFilter} />
+          <Filter input={this.filterUsers.bind(this)} />
         )}
         {visibleContacts.length > 0 && (
           <ContactList
