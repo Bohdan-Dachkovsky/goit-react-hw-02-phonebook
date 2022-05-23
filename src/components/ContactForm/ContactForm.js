@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { v4 as uuidv4 } from 'uuid'
 import styles from './ContactForm.module.css'
 
 export default class ContactForm extends Component {
@@ -53,28 +52,7 @@ export default class ContactForm extends Component {
     )
   }
 }
-ContactForm.defaultProps = {
-  onAddContact: (task) => {
-    const searchSameName = this.state.contacts
-      .map((cont) => cont.name)
-      .includes(task.name)
 
-    if (searchSameName) {
-      alert(`${task.name} is already in contacts`)
-    } else if (task.name.length === 0) {
-      alert('Fields must be filled!')
-    } else {
-      const contact = {
-        ...task,
-        id: uuidv4(),
-      }
-
-      this.setState((prevState) => ({
-        contacts: [...prevState.contacts, contact],
-      }))
-    }
-  },
-}
 ContactForm.propTypes = {
   onAddContact: PropTypes.func.isRequired,
 }
