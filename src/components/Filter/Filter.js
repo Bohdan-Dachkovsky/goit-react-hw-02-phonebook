@@ -9,18 +9,6 @@ export default function Filter({ input }) {
     </div>
   )
 }
-
-Filter.defaultProps = {
-  onchangeFilter: [],
-}
-
 Filter.propTypes = {
-  value: PropTypes.string.isRequired,
-  onchangeFilter: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    }),
-  ),
+  input: PropTypes.func.isRequired,
 }
