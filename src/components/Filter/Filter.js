@@ -5,7 +5,7 @@ export default function Filter({ input }) {
   return (
     <div>
       Find contacts by name
-      <input type="text" onInput={input} placeholder="Search" />
+      <input type="text" onChange={input} placeholder="Search" />
     </div>
   )
 }

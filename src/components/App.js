@@ -38,10 +38,12 @@ export default class App extends Component {
 
   getVisibleContacts = () => {
     const { contacts, filter } = this.state
-
-    return contacts.filter((contacts) =>
-      contacts.name.toLowerCase().includes(filter.toLowerCase()),
-    )
+    let hasNull = this.state.filters.includes('')
+    if (hasNull) {
+      return contacts.filter((contacts) =>
+        contacts.name.toLowerCase().includes(filter.toLowerCase()),
+      )
+    }
   }
 
   removeContact = (contactId) => {
@@ -60,11 +62,15 @@ export default class App extends Component {
   //     filter: target.value,
   //   })
   // }
-  filterUsers(e) {
-    this.setState({
-      filter: e.currentTarget.value,
-    })
+  filterUsers = (event) => {
+    this.setState({ filter: event.target.value })
   }
+  // filterUsers(event) {
+  //   const { value } = event.currentTarget
+  //   this.setState({
+  //     filter: value,
+  //   })
+  // }
 
   render() {
     const visibleContacts = this.getVisibleContacts()
@@ -76,7 +82,7 @@ export default class App extends Component {
         <ContactForm onAddContact={this.addContact} />
         <h2>Contacts</h2>
 
-        <Filter input={this.filterUsersc} />
+        <Filter input={this.filterUsers} />
 
         {visibleContacts.length > 0 && (
           <ContactList
