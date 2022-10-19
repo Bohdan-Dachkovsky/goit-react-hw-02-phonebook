@@ -38,12 +38,10 @@ export default class App extends Component {
 
   getVisibleContacts = () => {
     const { contacts, filter } = this.state
-    let hasNull = this.state.filters.includes('')
-    if (hasNull) {
-      return contacts.filter((contacts) =>
-        contacts.name.toLowerCase().includes(filter.toLowerCase()),
-      )
-    }
+
+    return contacts.filter((contacts) =>
+      contacts.name.toLowerCase().includes(filter.toLowerCase().trim('')),
+    )
   }
 
   removeContact = (contactId) => {
@@ -53,24 +51,10 @@ export default class App extends Component {
       }
     })
   }
-  // handleChange = ({ target }) => {
-  //   const { name, value } = target
-  //   this.setState({ [name]: value })
-  // }
-  // changeFilter = ({ target }) => {
-  //   this.setState({
-  //     filter: target.value,
-  //   })
-  // }
+
   filterUsers = (event) => {
     this.setState({ filter: event.target.value })
   }
-  // filterUsers(event) {
-  //   const { value } = event.currentTarget
-  //   this.setState({
-  //     filter: value,
-  //   })
-  // }
 
   render() {
     const visibleContacts = this.getVisibleContacts()
